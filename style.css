@@ -1,0 +1,59 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.menu ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.burger-menu span {
+  width: 25px;
+  height: 3px;
+  background: #fff;
+}
+
+.slider {
+  height: 300px;
+  display: flex;
+  overflow: hidden;
+}
+
+.slide {
+  min-width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #ccc;
+  color: #333;
+  font-size: 2rem;
+}
+
+.slide.active {
+  display: flex;
+}
