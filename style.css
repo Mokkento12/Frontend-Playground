@@ -80,6 +80,28 @@ header {
   top: 10px;
 }
 
+/* Slider */
+
+.slider {
+  height: 300px;
+  display: flex;
+  overflow: hidden;
+}
+
+.slide {
+  min-width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #ccc;
+  color: #333;
+  font-size: 2rem;
+}
+
+.slide.active {
+  display: flex;
+}
+
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
   .burger-menu {
