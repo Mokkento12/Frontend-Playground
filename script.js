@@ -14,16 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll(".slide");
   let currentIndex = 0;
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === index);
-    });
-  }
+  const showSlide = (index) => {
+    slides.forEach((slide) => slide.classList.remove("active"));
 
-  setInterval(() => {
+    slides[index].classList.add("active");
+  };
+
+  const nextSlide = () => {
     currentIndex = (currentIndex + 1) % slides.length;
     showSlide(currentIndex);
-  }, 3000);
+  };
+
+  const prevSlide = () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  };
+
+  document.getElementById("next").addEventListener("click", nextSlide);
+  document.getElementById("prev").addEventListener("click", prevSlide);
 
   showSlide(currentIndex);
 });

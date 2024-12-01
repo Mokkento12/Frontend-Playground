@@ -102,6 +102,48 @@ header {
   display: flex;
 }
 
+/* Кнопки переключения */
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Полупрозрачный черный фон */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  /* Круглая форма */
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  /* Эффект при наведении */
+  z-index: 10;
+  /* Кнопки должны быть над слайдами */
+}
+
+/* Стили для кнопки "Prev" */
+#prev {
+  left: 10px;
+  /* Отступ слева */
+}
+
+/* Стили для кнопки "Next" */
+#next {
+  right: 10px;
+  /* Отступ справа */
+}
+
+/* Эффект при наведении */
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Увеличиваем непрозрачность */
+}
+
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
   .burger-menu {
