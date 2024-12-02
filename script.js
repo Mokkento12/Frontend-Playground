@@ -12,26 +12,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Slider
 
   const slides = document.querySelectorAll(".slide");
-  let currentIndex = 0;
+  const prevButton = document.getElementById("prev");
+  const nextButton = document.getElementById("next");
+  let currentSlide = 0; // Индекс текущего слайда
 
-  const showSlide = (index) => {
-    slides.forEach((slide) => slide.classList.remove("active"));
+  // Функция для показа текущего слайда
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+  }
 
-    slides[index].classList.add("active");
-  };
+  // Событие для кнопки "Назад"
+  prevButton.addEventListener("click", () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+  });
 
-  const nextSlide = () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  };
+  // Событие для кнопки "Вперед"
+  nextButton.addEventListener("click", () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  });
 
-  const prevSlide = () => {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    showSlide(currentIndex);
-  };
-
-  document.getElementById("next").addEventListener("click", nextSlide);
-  document.getElementById("prev").addEventListener("click", prevSlide);
-
-  showSlide(currentIndex);
+  // Показ первого слайда при загрузке
+  showSlide(currentSlide);
 });
