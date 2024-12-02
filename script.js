@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll(".slide");
   const prevButton = document.getElementById("prev");
   const nextButton = document.getElementById("next");
+  const indicatorsContainer = document.querySelector(".slider-indicators");
   let currentSlide = 0; // Индекс текущего слайда
 
   // Функция для показа текущего слайда
@@ -37,4 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Показ первого слайда при загрузке
   showSlide(currentSlide);
+
+  // Indicators
 });

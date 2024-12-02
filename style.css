@@ -86,6 +86,8 @@ header {
   height: 300px;
   display: flex;
   overflow: hidden;
+  position: relative;
+  /* Для кнопок и индикаторов */
 }
 
 .slide {
@@ -96,10 +98,15 @@ header {
   background: #ccc;
   color: #333;
   font-size: 2rem;
+  transition: opacity 0.5s ease-in-out;
+  /* Плавная смена прозрачности */
+  opacity: 0;
 }
 
 .slide.active {
   display: flex;
+  opacity: 1;
+  /* Показываем активный слайд */
 }
 
 /* Кнопки переключения */
@@ -142,6 +149,27 @@ button {
 button:hover {
   background-color: rgba(0, 0, 0, 0.8);
   /* Увеличиваем непрозрачность */
+}
+
+.slider-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background: #333;
 }
 
 /* Медиа-запрос для больших экранов */
