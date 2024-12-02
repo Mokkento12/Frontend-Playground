@@ -40,4 +40,30 @@ document.addEventListener("DOMContentLoaded", () => {
   showSlide(currentSlide);
 
   // Indicators
+
+  slides.forEach((_, index) => {
+    const indicator = document.createElement("div");
+
+    indicator.classList.add("indicator");
+
+    if (index === 0) indicator.classList.add("active");
+
+    indicatorsContainer.appendChild(indicator);
+
+    indicator.addEventListener("click", () => {
+      currentSlide = index;
+      updateSlides();
+    });
+  });
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("active", index === currentSlide);
+    });
+
+    const indicators = document.querySelectorAll(".indicator");
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle("active", index === currentSlide);
+    });
+  }
 });

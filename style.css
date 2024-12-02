@@ -163,13 +163,13 @@ button:hover {
 .indicator {
   width: 10px;
   height: 10px;
-  background: #ccc;
+  background: #666;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .indicator.active {
-  background: #333;
+  background: #4caf50;
 }
 
 /* Медиа-запрос для больших экранов */
