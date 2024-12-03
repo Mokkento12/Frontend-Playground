@@ -76,4 +76,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Показ первого слайда и обновление индикаторов
   updateSlides();
+
+  // Modal
+
+  const modal = document.getElementById("modal");
+  const openModalBtn = document.getElementById("open-modal");
+  const closeModalBtn = document.getElementById("modal-close");
+
+  openModalBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+
+  closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 });

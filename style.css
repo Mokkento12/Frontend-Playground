@@ -172,6 +172,89 @@ button:hover {
   background: #4caf50;
 }
 
+/* Модальное окно */
+
+/* Затемнение фона */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  /* Скрыто по умолчанию */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Модальное окно */
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Кнопка закрытия */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Кнопка открытия */
+.open-modal-btn {
+  width: 300px;
+  display: inline-block;
+  /* Убедимся, что кнопка ведёт себя как блочный элемент */
+  margin: 20px;
+  padding: 12px 25px;
+  /* Увеличим внутренние отступы */
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  /* Градиентный фон */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  /* Более плавные углы */
+  font-size: 1rem;
+  /* Увеличим шрифт */
+  font-weight: bold;
+  text-align: center;
+  /* Центрируем текст */
+  white-space: nowrap;
+  /* Запрещаем перенос текста на новую строку */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Добавим тень */
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  /* Плавный переход */
+  cursor: pointer;
+}
+
+.open-modal-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #004085);
+  /* Темнее при наведении */
+  transform: scale(1.05);
+  /* Увеличение кнопки при наведении */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  /* Усилим тень */
+}
+
+.open-modal-btn:active {
+  transform: scale(0.98);
+  /* Лёгкое уменьшение при нажатии */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  /* Уменьшим тень */
+}
+
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
   .burger-menu {
