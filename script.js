@@ -83,20 +83,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const openModalBtn = document.getElementById("open-modal");
   const closeModalBtn = document.getElementById("modal-close");
 
+  // Открытие модального окна
   openModalBtn.addEventListener("click", () => {
     modal.style.display = "flex";
   });
 
+  // Закрытие модального окна
   closeModalBtn.addEventListener("click", () => {
     modal.style.display = "none";
   });
 
+  // Закрытие при клике на затемнение
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.style.display = "none";
     }
   });
 
+  // Закрытие при нажатии на клавишу Esc
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.style.display === "flex") {
       modal.style.display = "none";
