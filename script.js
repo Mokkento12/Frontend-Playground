@@ -106,4 +106,34 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.style.display = "none";
     }
   });
+
+  // Таблица
+
+  const table = document.querySelector("table");
+  const headers = table.querySelectorAll("th");
+  const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+  headers.forEach((header) => {
+    header.addEventListener("click", () => {
+      const sortType = header.dataset.sort; // Определяем колонку
+      const sortedRows = [...rows].sort((a, b) => {
+        const aText = a
+          .querySelector(`td:nth-child(${header.cellIndex + 1})`)
+          .textContent.trim();
+        const bText = b
+          .querySelector(`td:nth-child(${header.cellIndex + 1})`)
+          .textContent.trim();
+
+        if (sortType === "name" || sortType === "priority") {
+          return aText.localeCompare(bText);
+        } else if (sortType === "date") {
+          return new Date(aText) - new Date(bText);
+        }
+      });
+
+      // Удаляем старые строки и вставляем отсортированные
+      table.querySelector("tbody").innerHTML = "";
+      table.querySelector("tbody").append(...sortedRows);
+    });
+  });
 });
