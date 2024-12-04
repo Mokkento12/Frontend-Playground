@@ -255,6 +255,52 @@ button:hover {
   /* Уменьшим тень */
 }
 
+/* Таблица */
+
+.tasks-page {
+  padding: 20px;
+}
+
+.tasks-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+#search-input {
+  margin-bottom: 20px;
+  padding: 8px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  cursor: pointer;
+  background-color: #f4f4f4;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
   .burger-menu {
