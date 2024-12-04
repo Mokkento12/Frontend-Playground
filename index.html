@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
     <title>Frontend Playground</title>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="logo">My Site</div>
         <nav class="menu">
@@ -23,7 +24,7 @@
             </div>
         </nav>
     </header>
-    <!-- Header -->
+    <!-- Slider -->
     <main>
         <section class="slider">
             <div class="slide active">Slide1</div>
@@ -34,7 +35,7 @@
             <div class="slider-indicators"></div>
         </section>
     </main>
-    <!-- Slider -->
+    <!-- Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal">
             <button class="modal-close" id="modal-close">×</button>
@@ -44,6 +45,37 @@
     </div>
     <button id="open-modal" class="open-modal-btn">Открыть модальное
         окно</button>
+    <!-- Table -->
+    <section class="tasks-page">
+        <h2>Таблица задач</h2>
+        <input type="text" id="search-unput" placeholder="Искать...">
+        <table>
+            <thead>
+                <tr>
+                    <th data-sort="name">Название</th>
+                    <th data-sort="priority">Приоритет</th>
+                    <th data-sort="date">Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Сделать сайт</td>
+                    <td>Высокий</td>
+                    <td>2024-12-06</td>
+                </tr>
+                <tr>
+                    <td>Купить продукты</td>
+                    <td>Средний</td>
+                    <td>2024-12-07</td>
+                </tr>
+                <tr>
+                    <td>Позвонить другу</td>
+                    <td>Низкий</td>
+                    <td>2024-12-08</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
     <script src="script.js"></script>
 </body>
 </html>
