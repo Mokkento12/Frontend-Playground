@@ -108,11 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Таблица
-
   const table = document.querySelector("table");
   const headers = table.querySelectorAll("th");
   const rows = Array.from(table.querySelectorAll("tbody tr"));
 
+  // Сортировка таблицы
   headers.forEach((header) => {
     header.addEventListener("click", () => {
       const sortType = header.dataset.sort; // Определяем колонку
@@ -134,6 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
       // Удаляем старые строки и вставляем отсортированные
       table.querySelector("tbody").innerHTML = "";
       table.querySelector("tbody").append(...sortedRows);
+    });
+  });
+
+  // Поиск в таблице
+  const searchInput = document.getElementById("search-input");
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    rows.forEach((row) => {
+      const rowText = row.textContent.toLowerCase();
+      row.style.display = rowText.includes(query) ? "" : "none";
     });
   });
 });
