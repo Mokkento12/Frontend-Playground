@@ -107,4 +107,33 @@ export function initTable() {
       }
     });
   });
+
+  // Пагинация
+
+  const rowsPerPage = 10;
+
+  let currentPage = 1;
+
+  function renderTable() {
+    rows.forEach((row, index) => {
+      row.style.display =
+        index >= (currentPage - 1) * rowsPerPage &&
+        index < currentPage * rowsPerPage
+          ? ""
+          : "none";
+    });
+  }
+
+  document.getElementById("next-page").addEventListener("click", () => {
+    currentPage++;
+    renderTable();
+  });
+
+  document.addEventListener("prev-page").addEventListener("click", () => {
+    currentPage = Math.max(1, currentPage - 1);
+
+    renderTable();
+  });
+
+  renderTable();
 }
