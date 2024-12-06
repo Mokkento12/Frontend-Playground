@@ -79,4 +79,32 @@ export function initTable() {
           : "none";
     });
   });
+
+  // Редактирование строк
+
+  table.addEventListener("dblclick", (event) => {
+    const cell = event.target.closest("td");
+
+    if (!cell) return;
+
+    const oldValue = cell.textContent;
+
+    const input = document.createElement("input");
+
+    input.value = oldValue;
+    cell.textContent = "";
+    cell.appendChild(input);
+
+    input.focus();
+
+    input.addEventListener("blur", () => {
+      cell.textContent = input.value;
+    });
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        input.blur();
+      }
+    });
+  });
 }
