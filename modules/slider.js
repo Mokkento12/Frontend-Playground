@@ -1,4 +1,4 @@
-function initSlider() {
+export function initSlider() {
   const slides = document.querySelectorAll(".slide");
   const prevButton = document.getElementById("prev");
   const nextButton = document.getElementById("next");

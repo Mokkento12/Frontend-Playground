@@ -1,4 +1,4 @@
-function initTable() {
+export function initTable() {
   const table = document.querySelector("table");
   const searchInput = document.getElementById("search-input");
 

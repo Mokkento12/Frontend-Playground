@@ -1,4 +1,4 @@
-function initModal() {
+export function initModal() {
   const modal = document.getElementById("modal");
   const openModalBtn = document.getElementById("open-modal");
   const closeModalBtn = document.getElementById("modal-close");

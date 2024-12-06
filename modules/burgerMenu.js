@@ -1,4 +1,4 @@
-function initBurgerMenu() {
+export function initBurgerMenu() {
   const burger = document.querySelector(".burger-menu");
   const menu = document.querySelector(".menu ul");
 
