@@ -306,6 +306,11 @@ th.sorted {
   color: #333;
 }
 
+.highlight {
+  background-color: yellow;
+  color: black;
+}
+
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
   .burger-menu {

@@ -44,7 +44,21 @@ export function initTable() {
     const query = searchInput.value.toLowerCase();
     rows.forEach((row) => {
       const rowText = row.textContent.toLowerCase();
+      const matches = rowText.includes(query);
+
       row.style.display = rowText.includes(query) ? "" : "none";
+
+      if (matches) {
+        row.innerHTML = row.innerHTML.replace(
+          new RegExp(query, "gi"),
+          (match) => `<span class='highlight'>${match}</span>`
+        );
+      } else {
+        row.innerHTML = row.innerHTML.replace(
+          /<span class="highlight">|<\/span>/g,
+          ""
+        );
+      }
     });
   });
 
