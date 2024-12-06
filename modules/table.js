@@ -12,8 +12,10 @@ export function initTable() {
   // Сортировка
   headers.forEach((header) => {
     header.addEventListener("click", () => {
+      // Снимаем класс 'sorted' со всех заголовков
       headers.forEach((h) => h.classList.remove("sorted"));
 
+      // Добавляем класс 'sorted' к текущему заголовку
       header.classList.add("sorted");
 
       const sortType = header.dataset.sort;
@@ -43,6 +45,24 @@ export function initTable() {
     rows.forEach((row) => {
       const rowText = row.textContent.toLowerCase();
       row.style.display = rowText.includes(query) ? "" : "none";
+    });
+  });
+
+  // Фильтрация по столбцам
+
+  const filterSelect = document.getElementById("filter-priority");
+
+  filterSelect.addEventListener("change", () => {
+    const selectedPriority = filterSelect.value.toLowerCase();
+
+    rows.forEach((row) => {
+      const priorityCell = row.querySelector("td:nth-child(3)"); // Третья колонка
+      const priority = priorityCell.textContent.toLowerCase();
+
+      row.style.display =
+        selectedPriority === "all" || priority === selectedPriority
+          ? ""
+          : "none";
     });
   });
 }
