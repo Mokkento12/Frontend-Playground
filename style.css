@@ -311,6 +311,85 @@ th.sorted {
   color: black;
 }
 
+.pagination {
+  position: relative;
+  width: 100%;
+  /* Сделать контейнер растягиваемым */
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Пространство между кнопками */
+}
+
+.pagination button {
+  flex: 0 1 auto;
+  /* Оставить кнопки гибкими с минимальной шириной */
+  min-width: 100px;
+  /* Минимальная ширина кнопки */
+  text-align: center;
+  /* Выравнивание текста по центру */
+  margin: 0 10px;
+  /* Отступы между кнопками */
+  padding: 10px 15px;
+  /* Внутренние отступы */
+  background-color: #007bff;
+  /* Синий фон */
+  color: #fff;
+  /* Белый текст */
+  border: none;
+  /* Убираем границы */
+  border-radius: 5px;
+  /* Скругленные углы */
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+  /* Более темный синий при наведении */
+}
+
+/* Стили для кнопок пагинации */
+#next-page,
+#prev-page {
+  display: inline-block;
+  margin: 10px 5px;
+  padding: 8px 15px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Эффект при наведении */
+#next-page:hover,
+#prev-page:hover {
+  background: linear-gradient(90deg, #0056b3, #004085);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Эффект при нажатии */
+#next-page:active,
+#prev-page:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Если нужно стилизовать для отключённой кнопки */
+#next-page:disabled,
+#prev-page:disabled {
+  background: #ddd;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
   .burger-menu {
