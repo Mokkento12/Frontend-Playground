@@ -12,6 +12,10 @@ export function initTable() {
   // Сортировка
   headers.forEach((header) => {
     header.addEventListener("click", () => {
+      headers.forEach((h) => h.classList.remove("sorted"));
+
+      header.classList.add("sorted");
+
       const sortType = header.dataset.sort;
       const sortedRows = [...rows].sort((a, b) => {
         const aText = a
