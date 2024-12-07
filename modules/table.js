@@ -264,7 +264,19 @@ export function initTable() {
    * Инициализация таблицы.
    */
   function initialize() {
-    renderTasks(); // отображаем задачи при загрузке
+    // Загрузка задач из разметки в массив tasks
+    const rows = Array.from(tableBody.querySelectorAll("tr"));
+    tasks = rows.map((row) => {
+      const cells = row.querySelectorAll("td");
+      return {
+        name: cells[0].textContent.trim(),
+        priority: cells[1].textContent.trim(),
+        date: cells[2].textContent.trim(),
+      };
+    });
+
+    // Отображение задач
+    renderTasks();
   }
 
   initialize();
