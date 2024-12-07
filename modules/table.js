@@ -16,7 +16,7 @@ export function initTable() {
   }
 
   // Задачи
-  let tasks = [];
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // загружаем задачи из localStorage
   let currentPage = 1; // текущая страница
   const tasksPerPage = 3; // количество задач на страницу
 
@@ -65,6 +65,10 @@ export function initTable() {
     if (newTask.name && newTask.date) {
       tasks.push(newTask); // добавляем задачу в массив
       taskForm.reset(); // сбрасываем форму
+
+      // Сохраняем обновленный список задач в localStorage
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+
       if (currentPage === Math.ceil(tasks.length / tasksPerPage)) {
         // если новая задача на текущей последней странице, показываем ее
         renderTasks();
@@ -232,51 +236,9 @@ export function initTable() {
     });
   });
 
-  // Редактирование строк
-
-  table.addEventListener("dblclick", (event) => {
-    const cell = event.target.closest("td");
-
-    if (!cell) return;
-
-    const oldValue = cell.textContent;
-
-    const input = document.createElement("input");
-
-    input.value = oldValue;
-    cell.textContent = "";
-    cell.appendChild(input);
-
-    input.focus();
-
-    input.addEventListener("blur", () => {
-      cell.textContent = input.value;
-    });
-
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        input.blur();
-      }
-    });
-  });
-
-  /**
-   * Инициализация таблицы.
-   */
+  // Инициализация таблицы.
   function initialize() {
-    // Загрузка задач из разметки в массив tasks
-    const rows = Array.from(tableBody.querySelectorAll("tr"));
-    tasks = rows.map((row) => {
-      const cells = row.querySelectorAll("td");
-      return {
-        name: cells[0].textContent.trim(),
-        priority: cells[1].textContent.trim(),
-        date: cells[2].textContent.trim(),
-      };
-    });
-
-    // Отображение задач
-    renderTasks();
+    renderTasks(); // сразу отображаем задачи при загрузке страницы
   }
 
   initialize();
