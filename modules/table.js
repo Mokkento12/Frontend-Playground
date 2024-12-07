@@ -6,11 +6,15 @@ export function initTable() {
     return;
   }
 
-  const headers = table.querySelectorAll("th");
   const rows = Array.from(table.querySelectorAll("tbody tr"));
 
   // Сортировка
+  const headers = table.querySelectorAll("th");
+
   headers.forEach((header) => {
+    // Устанавливаем начальный порядок для каждого заголовка
+    header.dataset.order = "asc";
+
     header.addEventListener("click", () => {
       // Снимаем класс 'sorted' со всех заголовков
       headers.forEach((h) => h.classList.remove("sorted"));
@@ -19,7 +23,13 @@ export function initTable() {
       header.classList.add("sorted");
 
       const sortType = header.dataset.sort;
-      const sortedRows = [...rows].sort((a, b) => {
+      const currentOrder = header.dataset.order; // Текущий порядок ('asc' или 'desc')
+
+      // Меняем порядок сортировки
+      const newOrder = currentOrder === "asc" ? "desc" : "asc";
+      header.dataset.order = newOrder;
+
+      const sortedRows = rows.slice().sort((a, b) => {
         const aText = a
           .querySelector(`td:nth-child(${header.cellIndex + 1})`)
           .textContent.trim();
@@ -27,13 +37,19 @@ export function initTable() {
           .querySelector(`td:nth-child(${header.cellIndex + 1})`)
           .textContent.trim();
 
+        let comparison = 0;
+
         if (sortType === "name" || sortType === "priority") {
-          return aText.localeCompare(bText);
+          comparison = aText.localeCompare(bText);
         } else if (sortType === "date") {
-          return new Date(aText) - new Date(bText);
+          comparison = new Date(aText) - new Date(bText);
         }
+
+        // Переворачиваем порядок для 'desc'
+        return newOrder === "asc" ? comparison : -comparison;
       });
 
+      // Обновляем таблицу
       table.querySelector("tbody").innerHTML = "";
       table.querySelector("tbody").append(...sortedRows);
     });
