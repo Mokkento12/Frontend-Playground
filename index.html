@@ -85,6 +85,20 @@
             <button id="prev-page">Previous</button>
             <button id="next-page">Next</button>
         </div>
+        <section class="add-task-form">
+            <h2>Добавить задачу</h2>
+            <form id="task-form">
+                <input type="text" id="task-name" placeholder="Название задачи"
+                    required>
+                <select id="task-priority">
+                    <option value="high">Высокий</option>
+                    <option value="medium">Средний</option>
+                    <option value="low">Низкий</option>
+                </select>
+                <input type="date" id="task-date" required>
+                <button type="submit">Добавить</button>
+            </form>
+        </section>
     </section>
     <script type="module" src="script.js"></script>
 </body>
