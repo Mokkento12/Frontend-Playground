@@ -110,7 +110,8 @@ header {
 }
 
 /* Кнопки переключения */
-button {
+#next,
+#prev {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -213,10 +214,16 @@ button:hover {
 
 /* Кнопка открытия */
 .open-modal-btn {
+  position: fixed;
+  /* Закрепляем кнопку относительно окна браузера */
+  top: 60px;
+  /* Расстояние от верхнего края */
+  left: 20px;
+  /* Расстояние от левого края */
   width: 300px;
   display: inline-block;
-  /* Убедимся, что кнопка ведёт себя как блочный элемент */
-  margin: 20px;
+  margin: 0;
+  /* Убираем отступы, так как позиционируем через fixed */
   padding: 12px 25px;
   /* Увеличим внутренние отступы */
   background: linear-gradient(90deg, #007bff, #0056b3);
@@ -237,15 +244,17 @@ button:hover {
   transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
   /* Плавный переход */
   cursor: pointer;
+  z-index: 1000;
+  /* Поверх остальных элементов страницы */
 }
 
 .open-modal-btn:hover {
-  background: linear-gradient(90deg, #0056b3, #004085);
-  /* Темнее при наведении */
   transform: scale(1.05);
-  /* Увеличение кнопки при наведении */
+  /* Лёгкий эффект увеличения при наведении */
+  background: linear-gradient(90deg, #0056b3, #003580);
+  /* Темнее градиент */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  /* Усилим тень */
+  /* Более выраженная тень */
 }
 
 .open-modal-btn:active {
@@ -256,41 +265,62 @@ button:hover {
 }
 
 /* Таблица */
-
 .tasks-page {
   padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .tasks-page h2 {
   font-size: 1.8rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
 }
 
 #search-input {
   margin-bottom: 20px;
-  padding: 8px;
+  padding: 10px;
   width: 100%;
   max-width: 400px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
+#search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Общий стиль таблицы */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 20px;
+  font-size: 1rem;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 table th,
 table td {
   border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  padding: 12px;
 }
 
 table th {
   cursor: pointer;
-  background-color: #f4f4f4;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: relative;
+}
+
+table th:hover {
+  background-color: #0056b3;
 }
 
 table tr:nth-child(even) {
@@ -301,93 +331,98 @@ table tr:hover {
   background-color: #f1f1f1;
 }
 
-th.sorted {
-  background-color: #f0f0f0;
+/* Сортировка */
+th.sorted-asc::after,
+th.sorted-desc::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  border: 6px solid transparent;
+}
+
+th.sorted-asc::after {
+  border-bottom-color: white;
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+th.sorted-desc::after {
+  border-top-color: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Выделение строки */
+.highlight {
+  background-color: #ffe58f;
   color: #333;
 }
 
-.highlight {
-  background-color: yellow;
-  color: black;
-}
-
+/* Стили пагинации */
 .pagination {
-  position: relative;
-  width: 100%;
-  /* Сделать контейнер растягиваемым */
-  min-height: 50px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  /* Пространство между кнопками */
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 0;
 }
 
 .pagination button {
-  flex: 0 1 auto;
-  /* Оставить кнопки гибкими с минимальной шириной */
-  min-width: 100px;
-  /* Минимальная ширина кнопки */
-  text-align: center;
-  /* Выравнивание текста по центру */
-  margin: 0 10px;
-  /* Отступы между кнопками */
-  padding: 10px 15px;
-  /* Внутренние отступы */
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
   background-color: #007bff;
-  /* Синий фон */
-  color: #fff;
-  /* Белый текст */
   border: none;
-  /* Убираем границы */
   border-radius: 5px;
-  /* Скругленные углы */
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .pagination button:hover {
   background-color: #0056b3;
-  /* Более темный синий при наведении */
 }
 
-/* Стили для кнопок пагинации */
-#next-page,
-#prev-page {
-  display: inline-block;
-  margin: 10px 5px;
-  padding: 8px 15px;
-  background: linear-gradient(90deg, #007bff, #0056b3);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.pagination button:active {
+  transform: scale(0.95);
 }
 
-/* Эффект при наведении */
-#next-page:hover,
-#prev-page:hover {
-  background: linear-gradient(90deg, #0056b3, #004085);
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Эффект при нажатии */
-#next-page:active,
-#prev-page:active {
-  transform: scale(0.98);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Если нужно стилизовать для отключённой кнопки */
-#next-page:disabled,
-#prev-page:disabled {
-  background: #ddd;
-  color: #999;
+.pagination button:disabled {
+  background-color: #ccc;
+  color: #666;
   cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
+}
+
+.pagination button:first-of-type {
+  margin-right: auto;
+}
+
+.pagination button:last-of-type {
+  margin-left: auto;
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+
+  table th,
+  table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  #search-input {
+    max-width: 100%;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pagination button {
+    width: 100%;
+  }
 }
 
 /* Медиа-запрос для больших экранов */
