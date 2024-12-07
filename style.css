@@ -401,6 +401,47 @@ th.sorted-desc::after {
   margin-left: auto;
 }
 
+#filter-priority {
+  width: 150px;
+  /* Ширина */
+  padding: 8px;
+  /* Внутренние отступы */
+  border: 1px solid #ccc;
+  /* Цвет рамки */
+  border-radius: 4px;
+  /* Скругленные углы */
+  background-color: #f9f9f9;
+  /* Фон */
+  font-size: 14px;
+  /* Размер шрифта */
+  color: #333;
+  /* Цвет текста */
+  cursor: pointer;
+  /* Курсор при наведении */
+  outline: none;
+  /* Убираем обводку при фокусе */
+  transition: all 0.3s ease;
+  /* Анимация при взаимодействии */
+}
+
+#filter-priority:hover {
+  border-color: #888;
+  /* Цвет рамки при наведении */
+  background-color: #fff;
+  /* Фон при наведении */
+}
+
+#filter-priority:focus {
+  border-color: #007bff;
+  /* Цвет рамки при фокусе */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* Лёгкое свечение */
+}
+
+#filter-priority option {
+  padding: 8px;
+  /* Отступы внутри выпадающих элементов */
+}
 
 /* Адаптивность */
 @media (max-width: 768px) {
