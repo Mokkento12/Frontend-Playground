@@ -443,6 +443,43 @@ th.sorted-desc::after {
   /* Отступы внутри выпадающих элементов */
 }
 
+.add-task-form {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.add-task-form h2 {
+  margin-bottom: 10px;
+}
+
+#task-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#task-form input,
+#task-form select,
+#task-form button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#task-form button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+#task-form button:hover {
+  background-color: #45a049;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
 
