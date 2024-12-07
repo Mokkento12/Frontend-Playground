@@ -95,14 +95,25 @@ export function initTable() {
   const filterSelect = document.getElementById("filter-priority");
 
   filterSelect.addEventListener("change", () => {
-    const selectedPriority = filterSelect.value.toLowerCase();
+    const selectedPriority = filterSelect.value;
 
     rows.forEach((row) => {
-      const priorityCell = row.querySelector("td:nth-child(3)"); // Третья колонка
-      const priority = priorityCell.textContent.toLowerCase();
+      const priorityCell = row.querySelector("td:nth-child(2)"); // Вторая колонка
+      const priorityText = priorityCell.textContent.toLowerCase();
 
+      // Преобразуем текст из таблицы в соответствующее значение фильтра
+      const priorityValue =
+        priorityText === "высокий"
+          ? "high"
+          : priorityText === "средний"
+          ? "medium"
+          : priorityText === "низкий"
+          ? "low"
+          : "all";
+
+      // Показываем или скрываем строку в зависимости от выбранного фильтра
       row.style.display =
-        selectedPriority === "all" || priority === selectedPriority
+        selectedPriority === "all" || priorityValue === selectedPriority
           ? ""
           : "none";
     });
