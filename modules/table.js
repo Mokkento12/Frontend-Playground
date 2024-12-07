@@ -57,24 +57,36 @@ export function initTable() {
 
   // Поиск
   searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
+    const query = searchInput.value.trim().toLowerCase();
+
     rows.forEach((row) => {
-      const rowText = row.textContent.toLowerCase();
-      const matches = rowText.includes(query);
+      let matchFound = false;
 
-      row.style.display = rowText.includes(query) ? "" : "none";
+      // Удаляем все подсветки из ячеек
+      const cells = row.querySelectorAll("td");
+      cells.forEach((cell) => {
+        // Удаляем старые подсветки
+        cell.innerHTML = cell.textContent;
 
-      if (matches) {
-        row.innerHTML = row.innerHTML.replace(
-          new RegExp(query, "gi"),
-          (match) => `<span class='highlight'>${match}</span>`
-        );
-      } else {
-        row.innerHTML = row.innerHTML.replace(
-          /<span class="highlight">|<\/span>/g,
-          ""
-        );
-      }
+        // Если есть поисковый запрос, ищем совпадения
+        if (query) {
+          const cellText = cell.textContent.toLowerCase();
+
+          if (cellText.includes(query)) {
+            matchFound = true;
+
+            // Подсветка совпадений
+            const regex = new RegExp(`(${query})`, "gi");
+            cell.innerHTML = cell.textContent.replace(
+              regex,
+              `<span class="highlight">$1</span>`
+            );
+          }
+        }
+      });
+
+      // Показываем или скрываем строку в зависимости от наличия совпадений
+      row.style.display = matchFound || !query ? "" : "none";
     });
   });
 
