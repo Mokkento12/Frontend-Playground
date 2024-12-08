@@ -20,6 +20,16 @@ export function initTable() {
   let currentPage = 1; // текущая страница
   const tasksPerPage = 3; // количество задач на страницу
 
+  // Если задач нет в localStorage, добавляем примерные данные.
+  if (tasks.length === 0) {
+    tasks = [
+      { name: "Купить продукты", priority: "Средний", date: "2024-12-10" },
+      { name: "Подготовить отчет", priority: "Высокий", date: "2024-12-12" },
+      { name: "Позвонить другу", priority: "Низкий", date: "2024-12-15" },
+    ];
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
   /**
    * Функция для отображения задач на текущей странице.
    */
