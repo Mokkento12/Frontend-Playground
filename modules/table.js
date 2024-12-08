@@ -30,13 +30,18 @@ export function initTable() {
     const endIndex = startIndex + tasksPerPage;
 
     const tasksToDisplay = tasks.slice(startIndex, endIndex);
-    tasksToDisplay.forEach((task) => {
+    tasksToDisplay.forEach((task, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${task.name}</td>
-        <td>${task.priority}</td>
-        <td>${task.date}</td>
-      `;
+      <td>${task.name}</td>
+      <td>${task.priority}</td>
+      <td>${task.date}</td>
+      <td>
+        <button class="delete-task" data-index="${startIndex + index}">
+          Удалить
+        </button>
+      </td>
+    `;
       tableBody.appendChild(row);
     });
 
@@ -48,6 +53,18 @@ export function initTable() {
     const totalPages = Math.ceil(tasks.length / tasksPerPage);
     paginationInfo.textContent = `Страница ${currentPage} из ${totalPages}`;
   }
+
+  /**
+   * Слушатель для кнопок "Удалить".
+   */
+  tableBody.addEventListener("click", (e) => {
+    if (e.target.classList.contains("delete-task")) {
+      const taskIndex = parseInt(e.target.dataset.index, 10);
+      tasks.splice(taskIndex, 1); // Удаляем задачу из массива
+      localStorage.setItem("tasks", JSON.stringify(tasks)); // Сохраняем обновления
+      renderTasks(); // Перерисовываем таблицу
+    }
+  });
 
   /**
    * Функция для добавления новой задачи.
