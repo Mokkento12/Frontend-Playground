@@ -16,7 +16,15 @@ export function initTable() {
   }
 
   // Задачи
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // загружаем задачи из localStorage
+
+  let tasks = [];
+  try {
+    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  } catch (e) {
+    console.error("Error parsing tasks from localStorage:", e);
+    tasks = [];
+  }
+
   let currentPage = 1; // текущая страница
   const tasksPerPage = 3; // количество задач на страницу
 
@@ -225,7 +233,18 @@ export function initTable() {
     input.focus();
 
     input.addEventListener("blur", () => {
-      cell.textContent = input.value.trim() || oldValue;
+      const newValue = input.value.trim() || oldValue;
+      const rowIndex = Array.from(tableBody.querySelectorAll("tr")).indexOf(
+        cell.parentElement
+      );
+      const columnIndex = cell.cellIndex;
+
+      if (columnIndex === 0) tasks[rowIndex].name = newValue;
+      if (columnIndex === 1) tasks[rowIndex].priority = newValue;
+      if (columnIndex === 2) tasks[rowIndex].date = newValue;
+
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      cell.textContent = newValue;
     });
 
     input.addEventListener("keydown", (event) => {
