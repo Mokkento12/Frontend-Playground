@@ -263,9 +263,103 @@ export function initTable() {
     });
   });
 
-  // Инициализация таблицы.
+  // Сохранение текущих настроек в localStorage
+  function saveSettings() {
+    const settings = {
+      sortColumn:
+        Array.from(headers).find((header) =>
+          header.classList.contains("sorted")
+        )?.dataset.sort || null,
+      sortOrder:
+        Array.from(headers).find((header) =>
+          header.classList.contains("sorted")
+        )?.dataset.order || null,
+      filterPriority: filterSelect.value,
+    };
+    localStorage.setItem("tableSettings", JSON.stringify(settings));
+  }
+
+  // Восстановление настроек при загрузке
+  function loadSettings() {
+    const settings = JSON.parse(localStorage.getItem("tableSettings"));
+    if (settings) {
+      // Восстанавливаем сортировку
+      if (settings.sortColumn) {
+        const header = Array.from(headers).find(
+          (header) => header.dataset.sort === settings.sortColumn
+        );
+        if (header) {
+          header.dataset.order = settings.sortOrder;
+          header.click(); // Программно вызываем сортировку
+        }
+      }
+
+      // Восстанавливаем фильтрацию
+      if (settings.filterPriority) {
+        filterSelect.value = settings.filterPriority;
+        filterSelect.dispatchEvent(new Event("change"));
+      }
+    }
+  }
+
+  // Добавляем вызов сохранения в нужные места
+  headers.forEach((header) => {
+    header.addEventListener("click", saveSettings);
+  });
+
+  filterSelect.addEventListener("change", saveSettings);
+
+  // Экспорт задач в CSV-файл
+
+  document.getElementById("export-tasks").addEventListener("click", () => {
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      ["Название,Приоритет,Дата"]
+        .concat(
+          tasks.map((task) => `${task.name},${task.priority},${task.date}`)
+        )
+        .join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "tasks.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  // Импорт задач из файла
+
+  document
+    .getElementById("import-tasks")
+    .addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const csvData = e.target.result.split("\n").slice(1); // Пропускаем заголовок
+        csvData.forEach((line) => {
+          const [name, priority, date] = line.split(",");
+          if (name && priority && date) {
+            tasks.push({
+              name: name.trim(),
+              priority: priority.trim(),
+              date: date.trim(),
+            });
+          }
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        renderTasks();
+      };
+      reader.readAsText(file);
+    });
+
+  // Вызываем восстановление при инициализации
   function initialize() {
-    renderTasks(); // сразу отображаем задачи при загрузке страницы
+    loadSettings();
+    renderTasks();
   }
 
   initialize();
