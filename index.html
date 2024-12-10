@@ -103,6 +103,27 @@
         <button id="export-tasks">Экспорт в CSV</button>
         <input type="file" id="import-tasks" accept=".csv">
     </section>
+    <!-- Form -->
+    <section class="form">
+        <div class="form-container">
+            <h2>Регистрация</h2>
+            <form id="registrationForm">
+                <label for="name">Имя:</label>
+                <input class="form-input" type="text" id="name" name="name"
+                    required>
+                <span id="nameError" class="error"></span>
+                <label for="email">Email:</label>
+                <input class="form-input" type="email" id="email" name="email"
+                    required>
+                <span id="emailError" class="error"></span>
+                <label for="password">Пароль:</label>
+                <input class="form-input" type="password" id="password"
+                    name="password" required>
+                <span id="passwordError" class="error"></span>
+                <button class="form-button" type="submit">Отправить</button>
+            </form>
+        </div>
+    </section>
     <script type="module" src="js/script.js"></script>
 </body>
 </html>
