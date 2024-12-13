@@ -110,20 +110,20 @@
             <form id="registrationForm">
                 <label for="name">Имя:</label>
                 <input class="form-input" type="text" id="name" name="name"
-                    required>
+                    autocomplete="name" required>
                 <span id="nameError" class="error"></span>
                 <label for="email">Email:</label>
                 <input class="form-input" type="email" id="email" name="email"
-                    required>
+                    autocomplete="email" required>
                 <span id="emailError" class="error"></span>
                 <label for="password">Пароль:</label>
                 <input class="form-input" type="password" id="password"
-                    name="password" required>
+                    name="password" autocomplete="new-password" required>
                 <span id="passwordError" class="error"></span>
                 <button class="form-button" type="submit">Отправить</button>
             </form>
         </div>
     </section>
-    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/script.js" defer></script>
 </body>
 </html>
