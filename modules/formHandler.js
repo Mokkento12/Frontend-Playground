@@ -1,9 +1,8 @@
-// formHandler.js
-
 console.log("formHandler.js подключен");
 
 export function initFormHandler() {
   console.log("initFormHandler вызвана");
+
   // Функция для валидации имени
   function validateName(name) {
     if (name.trim() === "") {
@@ -17,7 +16,7 @@ export function initFormHandler() {
 
   // Функция для валидации email
   function validateEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Простая проверка email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       return "Введите корректный email";
     }
@@ -42,9 +41,9 @@ export function initFormHandler() {
 
   // Обработка отправки формы
   form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Предотвращаем отправку формы
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
 
-    // Получаем значения из полей ввода
+    // Получаем значения из полей
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
@@ -54,15 +53,48 @@ export function initFormHandler() {
     const emailError = validateEmail(emailInput.value);
     const passwordError = validatePassword(passwordInput.value);
 
-    // Отображаем ошибки (или очищаем их, если ошибок нет)
+    // Отображаем ошибки
     document.getElementById("nameError").textContent = nameError || "";
     document.getElementById("emailError").textContent = emailError || "";
     document.getElementById("passwordError").textContent = passwordError || "";
 
-    // Если ошибок нет, выводим сообщение об успешной отправке
+    // Если ошибок нет
     if (!nameError && !emailError && !passwordError) {
-      console.log("Форма успешно отправлена!");
-      alert("Форма успешно отправлена!");
+      const formData = {
+        name: nameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value,
+      };
+
+      console.log("Форма успешно отправлена!", formData);
+
+      // Отправляем данные на сервер (пока пишем в JSON-файл)
+      saveDataToFile(formData);
+
+      // Очищаем форму после успешной отправки
+      form.reset();
     }
   });
+
+  // Функция для записи данных в файл (имитация)
+  async function saveDataToFile(data) {
+    try {
+      const response = await fetch("http://localhost:3000/submit-contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log("Данные успешно сохранены!");
+        alert("Данные успешно отправлены!");
+      } else {
+        console.error("Ошибка при сохранении данных", response.statusText);
+      }
+    } catch (error) {
+      console.error("Ошибка сети при сохранении данных", error);
+    }
+  }
 }
