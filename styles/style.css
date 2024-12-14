@@ -603,6 +603,65 @@ label {
   margin-bottom: 10px;
 }
 
+/* Cards */
+
+/* Родительский контейнер */
+.container {
+  display: flex;
+  justify-content: center;
+  /* Горизонтальное центрирование */
+  align-items: center;
+  /* Вертикальное центрирование */
+  min-height: 100vh;
+  /* Высота контейнера по высоте экрана */
+  background-color: #f4f4f4;
+  /* Светлый фон */
+  padding: 20px;
+  /* Отступы */
+  box-sizing: border-box;
+  /* Учитывать паддинги в размерах */
+}
+
+/* Контейнер для карточек */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Сетка с 3 колонками */
+  gap: 20px;
+  /* Расстояние между карточками */
+  width: 80%;
+  /* Ширина контейнера */
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  /* Или любой другой размер */
+  object-fit: cover;
+  /* Сохраняет пропорции */
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 8px;
+}
+
+.card h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+}
+
 
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
