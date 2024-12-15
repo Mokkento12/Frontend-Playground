@@ -6,7 +6,10 @@ import { initFormHandler } from "../modules/formHandler.js";
 import { fetchAndRenderCards } from "../modules/cardRenderer.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchAndRenderCards("js/data/cardsData.json", "cards-container");
+  fetchAndRenderCards(
+    "https://jsonplaceholder.typicode.com/posts",
+    "cards-container"
+  );
   initFormHandler();
   initBurgerMenu();
   initSlider();

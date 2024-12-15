@@ -626,42 +626,36 @@ label {
 .cards-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* Сетка с 3 колонками */
   gap: 20px;
-  /* Расстояние между карточками */
-  width: 80%;
-  /* Ширина контейнера */
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .card {
-  background-color: white;
+  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out;
 }
 
-.card img {
-  width: 100%;
-  height: 150px;
-  /* Или любой другой размер */
-  object-fit: cover;
-  /* Сохраняет пропорции */
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 8px;
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card h3 {
-  margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  color: #333;
 }
 
 .card p {
   font-size: 1rem;
-  color: #555;
+  color: #666;
 }
-
 
 /* Медиа-запрос для больших экранов */
 @media (min-width: 768px) {
